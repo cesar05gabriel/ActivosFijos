@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Activos_FijoModelStoreContainer" CdmEntityContainer="Activos_FijoEntities">
+    <EntitySetMapping Name="Activos_Fijos">
+      <EntityTypeMapping TypeName="Activos_FijoModel.Activos_Fijos">
+        <MappingFragment StoreEntitySet="Activos_Fijos">
+          <ScalarProperty Name="Monto_Despreciado" ColumnName="Monto_Despreciado" />
+          <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+          <ScalarProperty Name="Tipos_Activos" ColumnName="Tipos_Activos" />
+          <ScalarProperty Name="Fecha_Registro" ColumnName="Fecha_Registro" />
+          <ScalarProperty Name="Valor_Compra" ColumnName="Valor_Compra" />
+          <ScalarProperty Name="Depreciacion_Acumulada" ColumnName="Depreciacion_Acumulada" />
+          <ScalarProperty Name="Desechado" ColumnName="Desechado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Calculo_Depreciacion">
+      <EntityTypeMapping TypeName="Activos_FijoModel.Calculo_Depreciacion">
+        <MappingFragment StoreEntitySet="Calculo_Depreciacion">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+          <ScalarProperty Name="Activo_Fijo" ColumnName="Activo_Fijo" />
+          <ScalarProperty Name="ID_AsientosCont" ColumnName="ID_AsientosCont" />
+          <ScalarProperty Name="Fecha_Proceso" ColumnName="Fecha_Proceso" />
+          <ScalarProperty Name="Monto_Despreciado" ColumnName="Monto_Despreciado" />
+          <ScalarProperty Name="Depreciacion_Acum" ColumnName="Depreciacion_Acum" />
+          <ScalarProperty Name="Cuenta_Compra" ColumnName="Cuenta_Compra" />
+          <ScalarProperty Name="Cuenta_Despreciacion" ColumnName="Cuenta_Despreciacion" />
+          <ScalarProperty Name="Desechado" ColumnName="Desechado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Departamentos">
+      <EntityTypeMapping TypeName="Activos_FijoModel.Departamentos">
+        <MappingFragment StoreEntitySet="Departamentos">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Desechado" ColumnName="Desechado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tipo_Persona">
+      <EntityTypeMapping TypeName="Activos_FijoModel.Tipo_Persona">
+        <MappingFragment StoreEntitySet="Tipo_Persona">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Tipo_Persona1" ColumnName="Tipo_Persona" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tipos_Activos">
+      <EntityTypeMapping TypeName="Activos_FijoModel.Tipos_Activos">
+        <MappingFragment StoreEntitySet="Tipos_Activos">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Contable_Compra" ColumnName="Contable_Compra" />
+          <ScalarProperty Name="Contable_Depreciacion" ColumnName="Contable_Depreciacion" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Desechado" ColumnName="Desechado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Empleados">
+      <EntityTypeMapping TypeName="Activos_FijoModel.Empleados">
+        <MappingFragment StoreEntitySet="Empleados">
+          <ScalarProperty Name="Desechado" ColumnName="Desechado" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Fecha_Ingreso" ColumnName="Fecha_Ingreso" />
+          <ScalarProperty Name="Tipo_Persona" ColumnName="Tipo_Persona" />
+          <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+          <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

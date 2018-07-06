@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Activos_FijoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Activos_Fijos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Departamento" Type="Int32" Nullable="false" />
+    <Property Name="Tipos_Activos" Type="Int32" Nullable="false" />
+    <Property Name="Fecha_Registro" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Valor_Compra" Type="Int32" Nullable="false" />
+    <Property Name="Depreciacion_Acumulada" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Desechado" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Departamentos" Relationship="Self.FK__Activos_F__Depar__534D60F1" FromRole="Activos_Fijos" ToRole="Departamentos" />
+    <NavigationProperty Name="Tipos_Activos1" Relationship="Self.FK__Activos_F__Tipos__5441852A" FromRole="Activos_Fijos" ToRole="Tipos_Activos" />
+    <NavigationProperty Name="Calculo_Depreciacion" Relationship="Self.FK__Calculo_D__Activ__5812160E" FromRole="Activos_Fijos" ToRole="Calculo_Depreciacion" />
+    <Property Name="Periodo" Type="DateTime" Precision="0" />
+    <Property Name="Monto_Despreciado" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Calculo_Depreciacion">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Periodo" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Activo_Fijo" Type="Int32" Nullable="false" />
+    <Property Name="ID_AsientosCont" Type="Int32" Nullable="false" />
+    <Property Name="Fecha_Proceso" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Monto_Despreciado" Type="Int32" Nullable="false" />
+    <Property Name="Depreciacion_Acum" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Cuenta_Compra" Type="Int32" Nullable="false" />
+    <Property Name="Cuenta_Despreciacion" Type="Int32" Nullable="false" />
+    <Property Name="Desechado" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Activos_Fijos" Relationship="Self.FK__Calculo_D__Activ__5812160E" FromRole="Calculo_Depreciacion" ToRole="Activos_Fijos" />
+  </EntityType>
+  <EntityType Name="Departamentos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Estado" Type="Boolean" Nullable="false" />
+    <Property Name="Desechado" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Activos_Fijos" Relationship="Self.FK__Activos_F__Depar__534D60F1" FromRole="Departamentos" ToRole="Activos_Fijos" />
+    <NavigationProperty Name="Empleados" Relationship="Activos_FijoModel.FK__Empleados__Depar__4F7CD00D" FromRole="Departamentos" ToRole="Empleados" />
+  </EntityType>
+  <EntityType Name="Tipo_Persona">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Tipo_Persona1" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Empleados" Relationship="Activos_FijoModel.FK__Empleados__Tipo___5070F446" FromRole="Tipo_Persona" ToRole="Empleados" />
+  </EntityType>
+  <EntityType Name="Tipos_Activos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Contable_Compra" Type="Int32" Nullable="false" />
+    <Property Name="Contable_Depreciacion" Type="Int32" Nullable="false" />
+    <Property Name="Estado" Type="Boolean" Nullable="false" />
+    <Property Name="Desechado" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Activos_Fijos" Relationship="Self.FK__Activos_F__Tipos__5441852A" FromRole="Tipos_Activos" ToRole="Activos_Fijos" />
+  </EntityType>
+  <Association Name="FK__Activos_F__Depar__534D60F1">
+    <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="1" />
+    <End Role="Activos_Fijos" Type="Self.Activos_Fijos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departamentos">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Activos_Fijos">
+        <PropertyRef Name="Departamento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Activos_F__Tipos__5441852A">
+    <End Role="Tipos_Activos" Type="Self.Tipos_Activos" Multiplicity="1" />
+    <End Role="Activos_Fijos" Type="Self.Activos_Fijos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tipos_Activos">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Activos_Fijos">
+        <PropertyRef Name="Tipos_Activos" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Calculo_D__Activ__5812160E">
+    <End Role="Activos_Fijos" Type="Self.Activos_Fijos" Multiplicity="1" />
+    <End Role="Calculo_Depreciacion" Type="Self.Calculo_Depreciacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Activos_Fijos">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Calculo_Depreciacion">
+        <PropertyRef Name="Activo_Fijo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Activos_FijoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Activos_Fijos" EntityType="Self.Activos_Fijos" />
+    <EntitySet Name="Calculo_Depreciacion" EntityType="Self.Calculo_Depreciacion" />
+    <EntitySet Name="Departamentos" EntityType="Self.Departamentos" />
+    <EntitySet Name="Tipo_Persona" EntityType="Self.Tipo_Persona" />
+    <EntitySet Name="Tipos_Activos" EntityType="Self.Tipos_Activos" />
+    <AssociationSet Name="FK__Activos_F__Depar__534D60F1" Association="Self.FK__Activos_F__Depar__534D60F1">
+      <End Role="Departamentos" EntitySet="Departamentos" />
+      <End Role="Activos_Fijos" EntitySet="Activos_Fijos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Activos_F__Tipos__5441852A" Association="Self.FK__Activos_F__Tipos__5441852A">
+      <End Role="Tipos_Activos" EntitySet="Tipos_Activos" />
+      <End Role="Activos_Fijos" EntitySet="Activos_Fijos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Calculo_D__Activ__5812160E" Association="Self.FK__Calculo_D__Activ__5812160E">
+      <End Role="Activos_Fijos" EntitySet="Activos_Fijos" />
+      <End Role="Calculo_Depreciacion" EntitySet="Calculo_Depreciacion" />
+    </AssociationSet>
+    <EntitySet Name="Empleados" EntityType="Activos_FijoModel.Empleados" />
+    <AssociationSet Name="FK__Empleados__Depar__4F7CD00D" Association="Activos_FijoModel.FK__Empleados__Depar__4F7CD00D">
+      <End Role="Departamentos" EntitySet="Departamentos" />
+      <End Role="Empleados" EntitySet="Empleados" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Empleados__Tipo___5070F446" Association="Activos_FijoModel.FK__Empleados__Tipo___5070F446">
+      <End Role="Tipo_Persona" EntitySet="Tipo_Persona" />
+      <End Role="Empleados" EntitySet="Empleados" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Empleados">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Cedula" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="Departamento" Type="Int32" Nullable="false" />
+    <Property Name="Tipo_Persona" Type="Int32" Nullable="false" />
+    <Property Name="Fecha_Ingreso" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Estado" Type="Boolean" Nullable="false" />
+    <Property Name="Desechado" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Departamentos" Relationship="Activos_FijoModel.FK__Empleados__Depar__4F7CD00D" FromRole="Empleados" ToRole="Departamentos" />
+    <NavigationProperty Name="Tipo_Persona1" Relationship="Activos_FijoModel.FK__Empleados__Tipo___5070F446" FromRole="Empleados" ToRole="Tipo_Persona" />
+  </EntityType>
+  <Association Name="FK__Empleados__Depar__4F7CD00D">
+    <End Type="Activos_FijoModel.Departamentos" Role="Departamentos" Multiplicity="1" />
+    <End Type="Activos_FijoModel.Empleados" Role="Empleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departamentos">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="Departamento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Empleados__Tipo___5070F446">
+    <End Type="Activos_FijoModel.Tipo_Persona" Role="Tipo_Persona" Multiplicity="1" />
+    <End Type="Activos_FijoModel.Empleados" Role="Empleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tipo_Persona">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="Tipo_Persona" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
