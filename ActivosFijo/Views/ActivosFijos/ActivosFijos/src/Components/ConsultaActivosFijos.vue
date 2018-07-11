@@ -4,7 +4,14 @@
 
 
   <div class = "container-fluid">
-<h3>Activos Fijos</h3>
+<div class="row">
+      <div class="col-sm-1">
+      <h3>Activos</h3>
+      </div>
+      <div class="col-sm-13">
+      <router-link v-bind:to="'/Af'"><button class="btn" id="mas"><i class="fa fa-plus"></i></button></router-link>
+      </div>
+      </div>
 <br>
 <br>
 <div class="table-responsive"> 
@@ -36,8 +43,8 @@
         <td>{{cuerpo.Periodo}}</td>
         <td>{{cuerpo.Monto_Despreciado}}</td>
         <td>
-        <button v-on:click.prevent="Eliminar(cuerpo.ID), Actualizar" class='btn btn-danger btn-sm'>Eliminar</button>
-        <button onclick="TestingIt()" class="btn btn-primary btn-sm">Editar</button>        
+        <button v-on:click="Eliminar(cuerpo.ID)" class='btn' id="eliminar"><i class="fa fa-trash"></i></button>
+        <router-link v-bind:to="'/EAF/' + cuerpo.ID"><button class="btn"><i class="fa fa-pencil"></i></button></router-link>        
         </td>
       </tr>
     </tbody>
@@ -71,9 +78,9 @@ export default {
       this.$http.put('http://localhost:61542/Api/Ac_Fijos/' + IdEliminado,{
         Desechado:this.desechado
 
-      }).then(function(data){
-        console.log(data);
-      });
+      }).then(location.reload())
+           
+        
     },
 
     Actualizar:function()
@@ -95,9 +102,6 @@ export default {
   }
 }
 
-function TestingIt(){
-  alert("we");
-}
 </script>
 
 <style scoped>
@@ -111,5 +115,34 @@ function TestingIt(){
 padding: 60px 50px;
 }
 
+.btn{
+    background-color:  #0158A7; /* Blue background */
+    border: none; /* Remove borders */
+    color:white; /* White text */
+    padding: 12px 16px; /* Some padding */
+    font-size: 16px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+}
+
+#mas{
+  background-color:  #0158A7; /* Blue background */
+    border: none; /* Remove borders */
+    color:white; /* White text */
+    padding: 5px 10px; /* Some padding */
+    font-size: 16px; /* Set a font size */
+    cursor: pointer;
+    margin-top: 17px;
+}
+
+#mas:hover{
+  color:#0158A7;
+    background-color: white;
+}
+
+
+.btn:hover {
+    color:#0158A7;
+    background-color: white;  
+}
 
 </style>

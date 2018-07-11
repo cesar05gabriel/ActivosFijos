@@ -32,19 +32,32 @@ export default {
   methods:{
     post:function()
     {
-      
-      this.$http.post('http://localhost:61542/Api/Departamentos',{
+    
+      this.$http.put('http://localhost:61542/Api/Departamentos/' + this.id,{
+        ID:this.id,
         Descripcion:this.cuerpos.Descripcion,
         Estado:this.cuerpos.Estado
+
       }).then(function(data){
         console.log(data);
+        alert("Departamento editado exitosamente");
+        window.location.href = "/Con";
       });
-      alert("Departamento guardado exitosamente");
-      window.location.href = "/Con";
-    
     
     }
-  }
+  },
+
+  created()
+    {
+        this.id = this.$route.params.id
+        if(this.id != null){
+          this.modo = 'E';
+        this.$http.get('http://localhost:61542/Api/Departamentos/' + this.id).then(function(data){
+           this.cuerpos = data.body;
+          console.log(data);
+        });
+    }
+    }
 
 }
 </script>

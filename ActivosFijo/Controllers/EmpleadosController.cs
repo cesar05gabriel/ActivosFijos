@@ -20,9 +20,23 @@ namespace ActivosFijo.Controllers
         private Activos_FijoEntities db = new Activos_FijoEntities();
 
         // GET: api/Empleados
-        public IQueryable<Empleados> GetEmpleados()
+        public List<EmpleadosViewModel> GetEmpleados()
         {
-            return db.Empleados.Where(x => !x.Desechado);
+            var model = db.Empleados.Where(x => !x.Desechado)
+                .Select(x => new EmpleadosViewModel
+                {
+                    ID = x.ID,
+                    Nombre = x.Nombre,
+                    Cedula = x.Cedula,
+                    Departamento = x.Departamentos.Descripcion,
+                    Tipo_Persona = x.Tipo_Persona1.Tipo_Persona1,
+                    Fecha_Ingreso = x.Fecha_Ingreso,
+                    Estado = x.Estado
+
+   
+                }).ToList();
+
+            return model;
         }
 
         // GET: api/Empleados/5
@@ -53,6 +67,10 @@ namespace ActivosFijo.Controllers
             }
 
             db.Entry(empleados).State = EntityState.Modified;
+
+            //var empleado = db.Empleados.FirstOrDefault(x => x.ID == id);
+
+            //empleado.Desechado = true;
 
             try
             {

@@ -2,7 +2,14 @@
   <div id="Consulta">
 
   <div class = "container-fluid">
+ <div class="row">
+<div class="col-sm-3">
 <h3>Departamentos de Unapec</h3>
+</div>
+<div class="col-sm-16">
+<router-link v-bind:to="'/Dep/'"><button class="btn" id="mas"><i class="fa fa-plus"></i></button></router-link>
+</div>
+</div>
 <br>
 <br>
 <div class="table-responsive"> 
@@ -22,8 +29,8 @@
         <td>{{cuerpo.Descripcion}}</td>
         <td>{{cuerpo.Estado}}</td>
         <td>
-          <button class="btn btn-primary">Editar</button>
-          <button class="btn btn-danger">Eliminar</button>
+         <button v-on:click="Eliminar(cuerpo.ID)" class='btn' id="eliminar"><i class="fa fa-trash"></i></button>
+        <router-link v-bind:to="'/ED/' + cuerpo.ID"><button class="btn"><i class="fa fa-pencil"></i></button></router-link>
         </td>
       </tr>
     </tbody>
@@ -48,19 +55,21 @@ export default {
      descripcion:"",
      estado: false,
      cuerpos: [],
-     search: ""
+     search: "",
+     desechado:true
     }
   },
 
   methods:{
-    post:function()
+    Eliminar:function(IdEliminado)
     {
-      this.$http.post('http://localhost:61542/Api/Departamentos',{
-        Descripcion:this.descripcion,
-        Estado:this.estado
-      }).then(function(data){
-        console.log(data);
-      });
+      this.$http.put('http://localhost:61542/Api/Departamentos/' + IdEliminado,{
+        ID: IdEliminado,
+        Desechado:this.desechado
+
+      }).then(location.reload())
+           
+        
     }
 
     },
@@ -84,6 +93,35 @@ export default {
 .container-fluid{
 
 padding: 60px 50px;
+}
+
+.btn{
+    background-color:  #0158A7; /* Blue background */
+    border: none; /* Remove borders */
+    color:white; /* White text */
+    padding: 12px 16px; /* Some padding */
+    font-size: 16px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+}
+
+#mas{
+  background-color:  #0158A7; /* Blue background */
+    border: none; /* Remove borders */
+    color:white; /* White text */
+    padding: 5px 10px; /* Some padding */
+    font-size: 16px; /* Set a font size */
+    cursor: pointer;
+    margin-top: 17px;
+}
+
+#mas:hover{
+  color:#0158A7;
+    background-color: white;
+}
+
+.btn:hover {
+    color:#0158A7;
+    background-color: white;  
 }
 
 

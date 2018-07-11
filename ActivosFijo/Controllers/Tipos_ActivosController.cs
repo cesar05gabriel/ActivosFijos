@@ -21,7 +21,7 @@ namespace ActivosFijo.Controllers
         // GET: api/Tipos_Activos
         public IQueryable<Tipos_Activos> GetTipos_Activos()
         {
-            return db.Tipos_Activos;
+            return db.Tipos_Activos.Where(x => !x.Desechado); 
         }
 
         // GET: api/Tipos_Activos/5
@@ -52,6 +52,10 @@ namespace ActivosFijo.Controllers
             }
 
             db.Entry(tipos_Activos).State = EntityState.Modified;
+
+            //var tactivo = db.Tipos_Activos.FirstOrDefault(x => x.ID == id);
+
+            //tactivo.Desechado = true;
 
             try
             {

@@ -1,5 +1,6 @@
     <template>
   <div id="Header">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       <link rel="stylesheet" type="text/css" href="bootstrap\css\bootstrap.css">
   <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
@@ -13,21 +14,20 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><router-link to="/Dep" id="mango" >DEPARTAMENTOS</router-link></li>
-        <li><router-link to="/TiAc" id="mango">TIPOS DE ACTIVOS</router-link></li>
-        <li><router-link to="/Em" id="mango">EMPLEADOS</router-link></li>
-        <li><router-link to="/Af" id="mango">ACTIVOS FIJOS</router-link></li>
+        <li><router-link to="/Con" id="mango" >DEPARTAMENTOS</router-link></li>
+        <li><router-link to="/CTA" id="mango">TIPOS DE ACTIVOS</router-link></li>
+        <li><router-link to="/CEm" id="mango">EMPLEADOS</router-link></li>
+        <li><router-link to="/CAF" id="mango">ACTIVOS FIJOS</router-link></li>
         <!--<li><router-link to="/Con" id="mango">CONSULTAS</router-link></li>-->   
-        <li><div class="dropdown">
+        <!--<li><div class="dropdown">
     <button class="dropbtn">CONSULTAS 
-      <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
       <router-link to="/Con">DEPARTAMENTOS</router-link>
       <router-link to="/CTA">TIPOS ACTIVOS</router-link>
       <router-link to="/CEm">EMPLEADOS</router-link>
       <router-link to="/CAF">ACTIVOS FIJOS</router-link>
-    </div></div></li>
+    </div></div></li>-->
       </ul>
     </div>
   </div>

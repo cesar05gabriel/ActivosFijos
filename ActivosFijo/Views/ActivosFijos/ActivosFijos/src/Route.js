@@ -7,7 +7,10 @@ import Consulta from './Components/Consulta.vue';
 import ConsultaTiposActivos from './Components/ConsultaTiposActivos.vue';
 import ConsultaEmpleados from './Components/ConsultaEmpleados.vue';
 import ConsultaActivosFijos from './Components/ConsultaActivosFijos.vue';
-import EditarDepartamento from './Components/EditarDepartamento.vue';
+import EdDepartamento from './Components/EdDepartamento.vue';
+import EdTiposActivos from './Components/EdTiposActivos.vue';
+import EdEmpleado from './Components/EdEmpleados.vue';
+import EdActivosFijos from './Components/EdActivosFijos.vue';
 
 export default[
     {path: '/Dep', component: Departamento},
@@ -19,5 +22,8 @@ export default[
     {path: '/CTA', component: ConsultaTiposActivos},
     {path: '/CEm', component: ConsultaEmpleados},
     {path: '/CAF', component: ConsultaActivosFijos},
-    {path: '/Eem/:id', component: EditarDepartamento}
+    {path: '/ED/:id?', component: EdDepartamento},
+    {path: '/ET/:id?', component: EdTiposActivos},
+    {path: '/EE/:id?', component: EdEmpleado},
+    {path: '/EAF/:id?', component: EdActivosFijos}
 ]

@@ -71,6 +71,10 @@ namespace ActivosFijo.Controllers
                 return BadRequest();
             }
 
+            //var departamento = db.Departamentos.FirstOrDefault(x => x.ID == id);
+
+            //departamento.Desechado = true;
+
             db.Entry(departamentos).State = EntityState.Modified;
 
             try

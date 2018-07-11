@@ -60,18 +60,21 @@ namespace ActivosFijo.Controllers
                 return BadRequest(ModelState);
             }
 
-            //if (id != activos_Fijos.ID)
-            //{
-            //    return BadRequest();
-            //}
+            if (id != activos_Fijos.ID)
+            {
+                return BadRequest();
+            }
 
-            var activo = db.Activos_Fijos.FirstOrDefault(x => x.ID == id);
+            db.Entry(activos_Fijos).State = EntityState.Modified;
 
-            activo.Desechado = true;
+            //var activo = db.Activos_Fijos.FirstOrDefault(x => x.ID == id);
+
+            //activo.Desechado = true;
 
             try
             {
                 db.SaveChanges();
+      
             }
             catch (DbUpdateConcurrencyException)
             {

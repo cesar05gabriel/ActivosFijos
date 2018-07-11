@@ -230,6 +230,7 @@
     <Compile Include="Models\Empleados.cs">
       <DependentUpon>ActivodaFijoContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmpleadosViewModel.cs" />
     <Compile Include="Models\Tipos_Activos.cs">
       <DependentUpon>ActivodaFijoContext.tt</DependentUpon>
     </Compile>
