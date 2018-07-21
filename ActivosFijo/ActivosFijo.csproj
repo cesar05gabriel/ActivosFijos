@@ -251,6 +251,7 @@
       <LastGenOutput>ActivodaFijoContext.Context.cs</LastGenOutput>
       <DependentUpon>ActivodaFijoContext.edmx</DependentUpon>
     </Content>
+    <Content Include="Models\ActivodaFijoContext.edmx.sql" />
     <Content Include="Models\ActivodaFijoContext.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ActivodaFijoContext.edmx</DependentUpon>
