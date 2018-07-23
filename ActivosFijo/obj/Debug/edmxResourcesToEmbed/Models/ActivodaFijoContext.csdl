@@ -143,6 +143,8 @@
     <Property Name="Desechado" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Departamentos" Relationship="Activos_FijoModel.FK__Empleados__Depar__4F7CD00D" FromRole="Empleados" ToRole="Departamentos" />
     <NavigationProperty Name="Tipo_Persona1" Relationship="Activos_FijoModel.FK__Empleados__Tipo___5070F446" FromRole="Empleados" ToRole="Tipo_Persona" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK__Empleados__Depar__4F7CD00D">
     <End Type="Activos_FijoModel.Departamentos" Role="Departamentos" Multiplicity="1" />

@@ -22,22 +22,26 @@ namespace ActivosFijo.Controllers
         // GET: api/Empleados
         public List<EmpleadosViewModel> GetEmpleados()
         {
-            var model = db.Empleados.Where(x => !x.Desechado)
-                .Select(x => new EmpleadosViewModel
-                {
-                    ID = x.ID,
-                    Nombre = x.Nombre,
-                    Cedula = x.Cedula,
-                    Departamento = x.Departamentos.Descripcion,
-                    Tipo_Persona = x.Tipo_Persona1.Tipo_Persona1,
-                    Fecha_Ingreso = x.Fecha_Ingreso,
-                    Estado = x.Estado
 
-   
-                }).ToList();
+      
+                var model = db.Empleados.Where(x => !x.Desechado)
+                    .Select(x => new EmpleadosViewModel
+                    {
+                        ID = x.ID,
+                        Nombre = x.Nombre,
+                        Cedula = x.Cedula,
+                        Departamento = x.Departamentos.Descripcion,
+                        Tipo_Persona = x.Tipo_Persona1.Tipo_Persona1,
+                        Fecha_Ingreso = x.Fecha_Ingreso,
+                        User = x.Username,
+                        Estado = x.Estado ? "Activo" : "Inactivo",
+                    }).ToList();
 
-            return model;
-        }
+                return model;
+
+            }
+
+        
 
         // GET: api/Empleados/5
         [ResponseType(typeof(Empleados))]
@@ -120,6 +124,27 @@ namespace ActivosFijo.Controllers
             db.SaveChanges();
 
             return Ok(empleados);
+        }
+
+        [HttpGet]
+        [Route("api/empleados/login")]
+        public int Login(string username, string password)
+        {
+            try
+            {
+                if ((string.IsNullOrWhiteSpace(username)) || (string.IsNullOrWhiteSpace(password))) { return -2; }
+                var user = db.Empleados.FirstOrDefault(x => x.Username == username);
+
+                if (user == null) { return 2; }
+                
+                if (user.Password == password) { return 1; }
+
+                return 3;
+            }
+            catch (Exception ex)
+            {
+            }
+            return -1;
         }
 
         protected override void Dispose(bool disposing)

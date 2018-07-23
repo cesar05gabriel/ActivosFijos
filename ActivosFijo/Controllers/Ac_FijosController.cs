@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.VisualBasic;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -55,6 +56,7 @@ namespace ActivosFijo.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult PutActivos_Fijos(int id, Activos_Fijos activos_Fijos)
         {
+            activos_Fijos.ID = id;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -99,6 +101,7 @@ namespace ActivosFijo.Controllers
             {
                 return BadRequest(ModelState);
             }
+                      
 
             db.Activos_Fijos.Add(activos_Fijos);
             db.SaveChanges();
@@ -116,7 +119,7 @@ namespace ActivosFijo.Controllers
                 return NotFound();
             }
 
-            db.Activos_Fijos.Remove(activos_Fijos);
+            activos_Fijos.Desechado = true;
             db.SaveChanges();
 
             return Ok(activos_Fijos);

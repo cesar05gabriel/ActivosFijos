@@ -13,7 +13,8 @@ namespace ActivosFijo.Models
         public string Departamento { get; set; }
         public string Tipo_Persona { get; set; }
         public DateTime Fecha_Ingreso { get; set; }
-        public bool Estado { get; set; }
+        public string User { get; set; }
+        public string Estado { get; set; }
    
     }
 }

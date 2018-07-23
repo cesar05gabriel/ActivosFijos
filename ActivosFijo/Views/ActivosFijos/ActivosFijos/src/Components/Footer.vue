@@ -1,5 +1,5 @@
 <template>
-  <div id="footer">
+  <div id="footer" class="fixed-bottom">
     <link rel="stylesheet" type="text/css" href="bootstrap\css\bootstrap.css">
 <div class="container-fluid final fixed-bottom">
 <div class="row">

@@ -22,6 +22,8 @@ namespace ActivosFijo.Models
         public System.DateTime Fecha_Ingreso { get; set; }
         public bool Estado { get; set; }
         public bool Desechado { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
     
         public virtual Departamentos Departamentos { get; set; }
         public virtual Tipo_Persona Tipo_Persona1 { get; set; }

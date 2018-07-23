@@ -11,10 +11,11 @@ import EdDepartamento from './Components/EdDepartamento.vue';
 import EdTiposActivos from './Components/EdTiposActivos.vue';
 import EdEmpleado from './Components/EdEmpleados.vue';
 import EdActivosFijos from './Components/EdActivosFijos.vue';
+import LoginForm from './Components/Login.vue';
 
 export default[
     {path: '/Dep', component: Departamento},
-    {path: '/', component: Home} ,
+    {path: '/Home', component: Home} ,
     {path: '/TiAc', component: TiposActivos},
     {path: '/Em', component: Empleados},
     {path: '/Af', component: ActivosFijos},
@@ -25,5 +26,6 @@ export default[
     {path: '/ED/:id?', component: EdDepartamento},
     {path: '/ET/:id?', component: EdTiposActivos},
     {path: '/EE/:id?', component: EdEmpleado},
-    {path: '/EAF/:id?', component: EdActivosFijos}
+    {path: '/EAF/:id?', component: EdActivosFijos},
+    {path: '/', component: LoginForm}
 ]

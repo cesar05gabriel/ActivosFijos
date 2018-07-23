@@ -28,14 +28,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="cuerpo in cuerpos" class="table-responsive">
+      <tr v-for="(cuerpo, index) in cuerpos" class="table-responsive">
         <td>{{cuerpo.ID}}</td>
         <td>{{cuerpo.Descripcion}}</td>
         <td>{{cuerpo.Contable_Compra}}</td>
         <td>{{cuerpo.Contable_Depreciacion}}</td>
         <td>{{cuerpo.Estado}}</td>
         <td>
-         <button v-on:click="Eliminar(cuerpo.ID)" class='btn' id="eliminar"><i class="fa fa-trash"></i></button>
+         <button v-on:click="Eliminar(cuerpo.ID, index)" class='btn' id="eliminar"><i class="fa fa-trash"></i></button>
         <router-link v-bind:to="'/ET/' + cuerpo.ID"><button class="btn"><i class="fa fa-pencil"></i></button></router-link>
         </td>
       </tr>
@@ -68,17 +68,19 @@ export default {
 
   methods:{
 
-    Eliminar:function(IdEliminado)
+    Eliminar:function(IdEliminado, index)
     {
-      this.$http.put('http://localhost:61542/Api/Tipos_Activos/' + IdEliminado,{
-        ID:this.cuerpos.ID,
-        Desechado:this.desechado
+      var txt;
+      var quitar = this.cuerpos;
+    var r = confirm("Desea eliminar el tipo de activo seleccionado ?" );
+    if (r == true) {
+        this.$http.delete('http://localhost:61542/Api/Tipos_Activos/' + IdEliminado,{
+        ID: IdEliminado,
 
-      }).then(location.reload())
-           
+      }).then(Response => quitar.splice(index, 1))
         
     }
-    
+    }
 
     },
 

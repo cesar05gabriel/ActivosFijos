@@ -6,7 +6,8 @@
       <form name="myform">
       <div class = "form-group">
           <label>Descripcion</label><br>
-          <input type="text" v-model="cuerpos.Descripcion" class="form-control" placeholder="Ingrese la descripcion" required><br><br>
+          <input type="text" v-model="cuerpos.Descripcion" v-validate="'required'" name="descripcion" class="form-control" placeholder="Ingrese la descripcion">
+          <span v-show="errors.has('descripcion')" class="text-danger">La descripcion es requerida.</span><br><br>
           <!--<input type="number" v-model="departamento" class="form-control" placeholder="Seleccione el departamento" min="1" required><br><br>
           <label>Tipo de Activos</label><br>
           <input type="number" v-model="tipo_activo" class="form-control" placeholder="Seleccione el tipo de activo" min="1" required><br><br>-->
@@ -26,16 +27,21 @@
           <br>
           <br>
           <label>Fecha de Registro</label><br>
-          <input type="date" v-model="cuerpos.Fecha_Registro" class="form-control" placeholder="Seleccione la fecha" min="2018-07-01" required><br><br>
+          <input type="date" v-model="cuerpos.Fecha_Registro" v-validate="'required'" name="fecha" class="form-control" placeholder="Seleccione la fecha">
+          <span v-show="errors.has('fecha')" class="text-danger">La fecha de registro es requerida.</span><br><br>
           <label>Valor de Compra</label><br>
-          <input type="number" v-model="cuerpos.Valor_Compra" class="form-control" placeholder="Ingrese el valor de compra" min="1" required><br><br>
+          <input type="number" v-model="cuerpos.Valor_Compra" v-validate="'required|min_value:1'" name="compra" class="form-control" placeholder="Ingrese el valor de compra">
+          <span v-show="errors.has('compra')" class="text-danger" id="error">Complete el valor de compra correctamente.</span><br><br>
           <label>Depreciacion Acumulada</label><br>
-          <input type="number" v-model="cuerpos.Depreciacion_Acumulada" class="form-control" placeholder="Ingrese la depreciacion acumulada" min="1" required><br><br>        
+          <input type="number" v-model="cuerpos.Depreciacion_Acumulada" v-validate="'required|min_value:1'" name="depre" class="form-control" placeholder="Ingrese la depreciacion acumulada">
+          <span v-show="errors.has('depre')" class="text-danger" id="error">Complete la depreciacion acumulada correctamente.</span><br><br>      
           <label>Periodo</label><br>
-          <input type="date" v-model="cuerpos.Periodo" class="form-control" placeholder="Seleccione el periodo" min="2018-07-01" required><br><br>   
+          <input type="date" v-model="cuerpos.Periodo" v-validate="'required'" name="fechas" class="form-control" placeholder="Seleccione el periodo">
+          <span v-show="errors.has('fechas')" class="text-danger">El periodo es requerido.</span><br><br>    
           <label>Monto Depreciacion</label><br>
-          <input type="text" v-model="monto" class="form-control" readonly><br><br><br><br>        
-          <button v-on:click.prevent ="post" class="btn btn-primary">Enviar</button><br><br>
+          <input type="text" v-model="monto" v-validate="'required|min_value:0'" name="monto" class="form-control" readonly>
+          <span v-show="errors.has('monto')" class="text-danger" id="error">El monto de depreciacion debe ser positivo.</span><br><br>        
+          <button v-on:click.prevent ="post" class="btn btn-primary" :disabled="errors.any()">Enviar</button><br><br>
       </div>
       </form>
       </div>
@@ -71,7 +77,10 @@ export default {
   methods:{
     post:function()
     {
-      this.$http.put('http://localhost:61542/Api/Ac_Fijos' + this.id,{
+      this.$validator.validateAll().then(res=>{
+                if(res) {
+      this.$http.put('https://activosfijo20180720102414.azurewebsites.net/Api/Ac_Fijos/' + this.id,{
+        ID:this.id,
         Descripcion:this.cuerpos.Descripcion,
         Departamento:this.cuerpos.Departamento,
         Tipos_Activos:this.cuerpos.Tipos_Activos,
@@ -82,11 +91,10 @@ export default {
         Monto_Despreciado:this.monto
       }).then(function(data){
         console.log(data);
+        this.$router.go(-1);
       });
 
-      
-      alert("Activo fijo editado exitosamente");
-      window.location.href = "/CAF";
+      }})
 
       
     }

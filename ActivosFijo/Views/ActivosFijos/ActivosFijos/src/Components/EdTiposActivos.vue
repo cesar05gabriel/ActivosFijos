@@ -6,14 +6,17 @@
       <form name="myform">
       <div class = "form-group">
           <label>Descripcion</label><br>
-          <input type="text" v-model="cuerpos.Descripcion" class="form-control" placeholder="Ingrese la descripcion" required><br><br>
+          <input type="text" v-model="cuerpos.Descripcion" v-validate="'required'" name="descripcion" class="form-control" placeholder="Ingrese la descripcion" >
+          <span v-show="errors.has('descripcion')" class="text-danger">La descripcion es requerida.</span><br><br>
           <label>Cuenta Contable Compra</label><br>
-          <input type="number" v-model="cuerpos.Contable_Compra" class="form-control" placeholder="Ingrese la cuenta del contable" min="1" required><br><br>
+          <input type="number" v-model="cuerpos.Contable_Compra" v-validate="'required|min_value:1'" name="compra" class="form-control" placeholder="Ingrese la cuenta del contable">
+          <span v-show="errors.has('compra')" class="text-danger" id="error">Complete la cuenta de compra correctamente.</span><br><br>
           <label>Cuenta Contable Depreciacion</label><br>
-          <input type="number" v-model="cuerpos.Contable_Depreciacion" class="form-control" placeholder="Ingrese la cuenta de depreciacion" min="1" required><br><br>
+          <input type="number" v-model="cuerpos.Contable_Depreciacion" v-validate="'required|min_value:1'" name="depre" class="form-control" placeholder="Ingrese la cuenta de depreciacion">
+          <span v-show="errors.has('depre')" class="text-danger">Complete la cuenta de depreciacion correctamente.</span><br><br>
           <label id="caja">Estado</label>
           <input type="checkbox" v-model="cuerpos.Estado"><br><br>          
-          <button v-on:click.prevent="post" class="btn btn-primary">Enviar</button><br><br>
+          <button v-on:click.prevent="post" class="btn btn-primary" :disabled="errors.any()">Enviar</button><br><br>
       </div>
       </form>
       </div>
@@ -37,6 +40,8 @@ export default {
   methods:{
     post:function()
     {
+        this.$validator.validateAll().then(res=>{
+                if(res) {
       this.$http.put('http://localhost:61542/Api/Tipos_Activos/' + this.id,{
         ID:this.id,
         Descripcion:this.cuerpos.Descripcion,
@@ -45,9 +50,9 @@ export default {
         Estado:this.cuerpos.Estado
       }).then(function(data){
         console.log(data);
+        this.$router.go(-1);
       });
-      alert("Tipo editado exitosamente");
-      window.location.href = "/CTA";
+      }}) 
     }
   },
 

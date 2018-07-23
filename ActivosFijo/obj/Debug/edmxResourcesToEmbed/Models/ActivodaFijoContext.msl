@@ -66,6 +66,8 @@
     <EntitySetMapping Name="Empleados">
       <EntityTypeMapping TypeName="Activos_FijoModel.Empleados">
         <MappingFragment StoreEntitySet="Empleados">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="Desechado" ColumnName="Desechado" />
           <ScalarProperty Name="Estado" ColumnName="Estado" />
           <ScalarProperty Name="Fecha_Ingreso" ColumnName="Fecha_Ingreso" />

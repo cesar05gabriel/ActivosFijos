@@ -51,6 +51,8 @@
     <Property Name="Fecha_Ingreso" Type="date" Nullable="false" />
     <Property Name="Estado" Type="bit" Nullable="false" />
     <Property Name="Desechado" Type="bit" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Tipo_Persona">
     <Key>

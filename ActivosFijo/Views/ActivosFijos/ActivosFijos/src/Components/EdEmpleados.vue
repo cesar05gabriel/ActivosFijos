@@ -6,9 +6,10 @@
       <form name="myform">
       <div class = "form-group">
           <label>Nombre</label><br>
-          <input type="text" v-model="cuerpos.Nombre" class="form-control" placeholder="Ingrese el nombre" required><br><br>
+          <input type="text" v-model="cuerpos.Nombre" v-validate="'required'" name="nombre" class="form-control" placeholder="Ingrese el nombre">
+          <span v-show="errors.has('nombre')" class="text-danger">El nombre es requerido.</span><br><br>
           <label>Cedula</label><br>
-          <input type="text" v-model="cuerpos.Cedula" class="form-control" placeholder="Ingrese la cedula" required><br><br>
+          <input type="text" v-model="cuerpos.Cedula" v-validate="'required'" name="cedula" class="form-control" placeholder="Ingrese la cedula" required><br><br>
           <label>Departamento</label><br>
           <!--<input type="number" v-model="departamento" class="form-control" placeholder="Seleccione el departamento" min="1" required><br><br>-->
           <select class="custom-select" style="width:100px; height:30px;" v-model="cuerpos.Departamento">
@@ -26,10 +27,11 @@
           <br>
           <br>
           <label>Fecha de Ingreso</label><br>
-          <input type="date" v-model="cuerpos.Fecha_Ingreso" class="form-control" placeholder="Seleccione la fecha" min="2018-07-01" required><br><br>
+          <input type="date" v-model="cuerpos.Fecha_Ingreso" v-validate="'required'" name="fecha" class="form-control" placeholder="Seleccione la fecha">
+          <span v-show="errors.has('fecha')" class="text-danger">La fecha de ingreso es requerida.</span><br><br>
           <label id="caja">Estado</label>
           <input type="checkbox" v-model="cuerpos.Estado"><br><br>          
-          <button v-on:click.prevent ="post" class="btn btn-primary">Enviar</button><br><br>
+          <button v-on:click.prevent ="post" class="btn btn-primary" :disabled="errors.any()">Enviar</button><br><br>
       </div>
       </form>
       </div>
@@ -49,13 +51,16 @@ export default {
      estado: false,
      cuerpos:[],
      Tiposcuerpos:[],
-     id:null 
+     id:null,
+     editar:[] 
     }
   },
 
   methods:{
     post:function()
     {
+      this.$validator.validateAll().then(res=>{
+                if(res) {
       this.$http.put('http://localhost:61542/Api/Empleados/' + this.id,{
         ID:this.id,
         Nombre:this.cuerpos.Nombre,
@@ -66,9 +71,9 @@ export default {
         Estado:this.cuerpos.Estado
       }).then(function(data){
         console.log(data);
+        this.$router.go(-1);
       });
-      alert("Empleado editado exitosamente!");
-      window.location.href = "/CEm";
+      }})
     }
   },
 
@@ -82,6 +87,11 @@ export default {
           console.log(data);
         });
     }
+
+    this.$http.get('http://localhost:61542/Api/Empleados').then(function(data){
+           this.editar = data.body;
+          console.log(data);
+        });
 
         this.$http.get('http://localhost:61542/Api/Tipo_Persona').then(function(data){
            this.Tiposcuerpos = data.body;

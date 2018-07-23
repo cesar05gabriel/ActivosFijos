@@ -14,13 +14,19 @@ export default {
   components:{
     'app-header': Header,
     'app-footer': Footer
+
   },
   data () {
     return {
       
     }
   }
+  
 }
+
+
+  
+
 </script>
 
 <style scoped>

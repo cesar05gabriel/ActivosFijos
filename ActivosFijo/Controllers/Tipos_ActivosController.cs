@@ -19,9 +19,19 @@ namespace ActivosFijo.Controllers
         private Activos_FijoEntities db = new Activos_FijoEntities();
 
         // GET: api/Tipos_Activos
-        public IQueryable<Tipos_Activos> GetTipos_Activos()
+        public IQueryable<Tipos_Activos> GetTipos_Activos(bool tipos = false)
         {
-            return db.Tipos_Activos.Where(x => !x.Desechado); 
+
+            if (tipos == true)
+            {
+                return db.Tipos_Activos.Where(x => !x.Desechado && x.Estado);
+
+            }
+
+            else
+            {
+                return db.Tipos_Activos.Where(x => !x.Desechado);
+            }
         }
 
         // GET: api/Tipos_Activos/5
@@ -101,7 +111,7 @@ namespace ActivosFijo.Controllers
                 return NotFound();
             }
 
-            db.Tipos_Activos.Remove(tipos_Activos);
+            tipos_Activos.Desechado = true;
             db.SaveChanges();
 
             return Ok(tipos_Activos);

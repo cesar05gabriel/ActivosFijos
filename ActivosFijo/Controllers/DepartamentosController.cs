@@ -18,24 +18,33 @@ namespace ActivosFijo.Controllers
     {
         private Activos_FijoEntities db = new Activos_FijoEntities();
         
-        [HttpGet]
-        [Route("api/Departamentos/UpdateDepartamento")]
-        public bool UpdateDepartamento(int ID, string Descripcion, bool Estado)
-        {
-            var dep = db.Departamentos.FirstOrDefault(x => x.ID == ID);
-            dep.Descripcion = Descripcion;
-            dep.Estado = Estado;
+        //[HttpGet]
+        //[Route("api/Departamentos/UpdateDepartamento")]
+        //public bool UpdateDepartamento(int ID, string Descripcion, bool Estado)
+        //{
+        //    var dep = db.Departamentos.FirstOrDefault(x => x.ID == ID);
+        //    dep.Descripcion = Descripcion;
+        //    dep.Estado = Estado;
 
-            db.SaveChanges();
+        //    db.SaveChanges();
 
 
-            return true;
-        }
+        //    return true;
+        //}
 
         // GET: api/Departamentos
-        public IQueryable<Departamentos> GetDepartamentos()
-        {
-            return db.Departamentos.Where(x => !x.Desechado);
+        public IQueryable<Departamentos> GetDepartamentos(bool activos = false)
+            {
+            if (activos == true)
+            {
+                return db.Departamentos.Where(x => !x.Desechado && x.Estado);
+
+            }
+
+            else
+            {
+                return db.Departamentos.Where(x => !x.Desechado);
+            }
         }
 
         // GET: api/Departamentos/5
@@ -121,7 +130,7 @@ namespace ActivosFijo.Controllers
                 return NotFound();
             }
 
-            db.Departamentos.Remove(departamentos);
+            departamentos.Desechado = true;
             db.SaveChanges();
 
             return Ok(departamentos);

@@ -30,7 +30,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="cuerpo in cuerpos" class="table-responsive">
+      <tr v-for="(cuerpo, index) in cuerpos" class="table-responsive">
         <td>{{cuerpo.ID}}</td>
         <td>{{cuerpo.Nombre}}</td>
         <td>{{cuerpo.Cedula}}</td>
@@ -39,7 +39,7 @@
         <td>{{cuerpo.Fecha_Ingreso}}</td>
         <td>{{cuerpo.Estado}}</td>
         <td>
-         <button v-on:click="Eliminar(cuerpo.ID)" class='btn' id="eliminar"><i class="fa fa-trash"></i></button>
+         <button v-on:click="Eliminar(cuerpo.ID, index)" class='btn' id="eliminar"><i class="fa fa-trash"></i></button>
         <router-link v-bind:to="'/EE/' + cuerpo.ID"><button class="btn"><i class="fa fa-pencil"></i></button></router-link>
         </td>
       </tr>
@@ -65,20 +65,23 @@ export default {
      descripcion:"",
      estado: false,
      cuerpos: [],
-     desechado: false
+     desechado: true
     }
   },
 
   methods:{
 
-    Eliminar:function(IdEliminado)
+    Eliminar:function(IdEliminado, index)
     {
-      this.$http.put('http://localhost:61542/Api/Empleados/' + IdEliminado,{
-        ID: 2,
-        Desechado:this.desechado
+      var txt;
+      var quitar = this.cuerpos;
+    var r = confirm("Desea eliminar el empleado seleccionado ?" );
+    if (r == true) {
+        this.$http.delete('http://localhost:61542/Api/Empleados/' + IdEliminado,{
+        ID: IdEliminado,
 
-      }).then(location.reload())
-           
+      }).then(Response => quitar.splice(index, 1))
+    }    
         
     }
 

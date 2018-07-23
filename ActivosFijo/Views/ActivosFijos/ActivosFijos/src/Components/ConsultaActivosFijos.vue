@@ -26,13 +26,13 @@
         <th>Fecha de Registro</th>
         <th>Valor de Compra</th>
         <th>Depreciacion Acumulada</th>
-        <th>Periodo</th>
+        <!--<th>Periodo</th>-->
         <th>Monto Depreciacion</th>
         <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="cuerpo in cuerpos" class="table-responsive">
+      <tr v-for="(cuerpo, index) in cuerpos" class="table-responsive">
         <td>{{cuerpo.ID}}</td>
         <td>{{cuerpo.Descripcion}}</td>
         <td>{{cuerpo.Departamento}}</td>
@@ -40,10 +40,10 @@
         <td>{{cuerpo.Fecha_Registro}}</td>
         <td>{{cuerpo.Valor_Compra}}</td>
         <td>{{cuerpo.Depreciacion_Acumulada}}</td>
-        <td>{{cuerpo.Periodo}}</td>
+        <!--<td>{{cuerpo.Periodo}}</td>-->
         <td>{{cuerpo.Monto_Despreciado}}</td>
         <td>
-        <button v-on:click="Eliminar(cuerpo.ID)" class='btn' id="eliminar"><i class="fa fa-trash"></i></button>
+        <button v-on:click="Eliminar(cuerpo.ID, index)" class='btn' id="eliminar"><i class="fa fa-trash"></i></button>
         <router-link v-bind:to="'/EAF/' + cuerpo.ID"><button class="btn"><i class="fa fa-pencil"></i></button></router-link>        
         </td>
       </tr>
@@ -73,12 +73,18 @@ export default {
   },
 
   methods:{
-    Eliminar:function(IdEliminado)
+    Eliminar:function(IdEliminado, index)
     {
-      this.$http.put('http://localhost:61542/Api/Ac_Fijos/' + IdEliminado,{
-        Desechado:this.desechado
+     var txt;
+      var quitar = this.cuerpos;
+    var r = confirm("Desea eliminar el activo fijo seleccionado ?" );
+    if (r == true) {
+        this.$http.delete('http://localhost:61542/Api/Ac_Fijos/' + IdEliminado,{
+        ID: IdEliminado,
 
-      }).then(location.reload())
+      }).then(Response => quitar.splice(index, 1))
+
+    } 
            
         
     },

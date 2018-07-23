@@ -10,11 +10,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span> 
       </button>
-      <router-link to="/" id="home" class="navbar-brand" href="Proyecto.html">HOME</router-link>
+      <router-link to="/" id="home" class="navbar-brand">SIGN OUT</router-link>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><router-link to="/Con" id="mango" >DEPARTAMENTOS</router-link></li>
+        <li><router-link to="/Con" id="mango">DEPARTAMENTOS</router-link></li>
         <li><router-link to="/CTA" id="mango">TIPOS DE ACTIVOS</router-link></li>
         <li><router-link to="/CEm" id="mango">EMPLEADOS</router-link></li>
         <li><router-link to="/CAF" id="mango">ACTIVOS FIJOS</router-link></li>
@@ -35,7 +35,7 @@
 <div class="jumbotron text-center">
 <br>
 <br>
-<header><strong><h1><a id="principal">Plataforma de Activos Fijos</a></h1></strong></header>
+<router-link to="/home" id="ruta"><header><strong><h1><a id="principal">Plataforma de Activos Fijos</a></h1></strong></header></router-link>
 <p>Sistema de Contabilidad de UNAPEC</p>    
 </div>
 
@@ -74,6 +74,22 @@ color: white;
 #principal:hover{
 color:white;
 text-decoration: none;
+}
+
+#ruta:link{
+  text-decoration: none;
+}
+
+#ruta:hover{
+  text-decoration: none;
+}
+
+#ruta:visited{
+  text-decoration: none;
+}
+
+#ruta:active  {
+  text-decoration: none;
 }
 
 #mango{
