@@ -133,7 +133,7 @@ namespace ActivosFijo.Controllers
             try
             {
                 if ((string.IsNullOrWhiteSpace(username)) || (string.IsNullOrWhiteSpace(password))) { return -2; }
-                var user = db.Empleados.FirstOrDefault(x => x.Username == username);
+                var user = db.Empleados.FirstOrDefault(x => x.Desechado != true && x.Estado == true && x.Username == username);
 
                 if (user == null) { return 2; }
                 

@@ -193,6 +193,7 @@
     <Compile Include="Controllers\Ac_FijosController.cs" />
     <Compile Include="Controllers\Calculo_DepreciacionController.cs" />
     <Compile Include="Controllers\DepartamentosController.cs" />
+    <Compile Include="Controllers\DepreciacionController.cs" />
     <Compile Include="Controllers\EmpleadosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -243,7 +244,10 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Models\ActivodaFijoContext.Context.tt">
@@ -251,6 +255,7 @@
       <LastGenOutput>ActivodaFijoContext.Context.cs</LastGenOutput>
       <DependentUpon>ActivodaFijoContext.edmx</DependentUpon>
     </Content>
+    <Content Include="Models\ActivodaFijoContext.edmx.sql" />
     <Content Include="Models\ActivodaFijoContext.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ActivodaFijoContext.edmx</DependentUpon>
@@ -287,6 +292,12 @@
     <Content Include="Models\ActivodaFijoContext.edmx.diagram">
       <DependentUpon>ActivodaFijoContext.edmx</DependentUpon>
     </Content>
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <None Include="Properties\PublishProfiles\ActivosFijo20180720102414 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -307,6 +318,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Depreciacion\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

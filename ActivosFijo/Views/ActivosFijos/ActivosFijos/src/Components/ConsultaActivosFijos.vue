@@ -44,7 +44,8 @@
         <td>{{cuerpo.Monto_Despreciado}}</td>
         <td>
         <button v-on:click="Eliminar(cuerpo.ID, index)" class='btn' id="eliminar"><i class="fa fa-trash"></i></button>
-        <router-link v-bind:to="'/EAF/' + cuerpo.ID"><button class="btn"><i class="fa fa-pencil"></i></button></router-link>        
+        <router-link v-bind:to="'/EAF/' + cuerpo.ID"><button class="btn"><i class="fa fa-pencil"></i></button></router-link>
+        <a :href="'http://localhost:61542/Depreciacion/Index/' + cuerpo.ID"><button class="btn"><i class="fa fa-list"></i></button></a>        
         </td>
       </tr>
     </tbody>
@@ -79,7 +80,7 @@ export default {
       var quitar = this.cuerpos;
     var r = confirm("Desea eliminar el activo fijo seleccionado ?" );
     if (r == true) {
-        this.$http.delete('http://localhost:61542/Api/Ac_Fijos/' + IdEliminado,{
+        this.$http.delete('http://activosfijo20180720102414.azurewebsites.net/api/Ac_Fijos/' + IdEliminado,{
         ID: IdEliminado,
 
       }).then(Response => quitar.splice(index, 1))
@@ -91,7 +92,7 @@ export default {
 
     Actualizar:function()
     {
-      this.$http.get('http://localhost:61542/Api/Ac_Fijos').then(function(data){
+      this.$http.get('http://activosfijo20180720102414.azurewebsites.net/api/Ac_Fijos').then(function(data){
            this.cuerpos = data.body;
           console.log(data);
         })
@@ -101,7 +102,7 @@ export default {
 
     created()
     {
-        this.$http.get('http://localhost:61542/Api/Ac_Fijos').then(function(data){
+        this.$http.get('http://activosfijo20180720102414.azurewebsites.net/api/Ac_Fijos').then(function(data){
            this.cuerpos = data.body;
           console.log(data);
         })

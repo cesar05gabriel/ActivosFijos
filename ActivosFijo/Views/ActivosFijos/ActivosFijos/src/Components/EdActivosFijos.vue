@@ -77,6 +77,7 @@ export default {
   methods:{
     post:function()
     {
+      console.log(this.cuerpos);
       this.$validator.validateAll().then(res=>{
                 if(res) {
       this.$http.put('https://activosfijo20180720102414.azurewebsites.net/Api/Ac_Fijos/' + this.id,{
@@ -92,7 +93,9 @@ export default {
       }).then(function(data){
         console.log(data);
         this.$router.go(-1);
-      });
+      }).catch(function(data){
+        console.log(data);
+      })
 
       }})
 
@@ -105,18 +108,18 @@ export default {
         this.id = this.$route.params.id
         if(this.id != null){
           this.modo = 'E';
-        this.$http.get('http://localhost:61542/Api/Ac_Fijos/' + this.id).then(function(data){
+        this.$http.get('http://activosfijo20180720102414.azurewebsites.net/api/Ac_Fijos/' + this.id).then(function(data){
            this.cuerpos = data.body;
           console.log(data);
         });
     }
 
-        this.$http.get('http://localhost:61542/Api/Departamentos').then(function(data){
+        this.$http.get('http://activosfijo20180720102414.azurewebsites.net/api/Departamentos').then(function(data){
            
            console.log(data);
         })
 
-        this.$http.get('http://localhost:61542/Api/Tipos_Activos').then(function(data){
+        this.$http.get('http://activosfijo20180720102414.azurewebsites.net/api/Tipos_Activos').then(function(data){
            this.Tiposcuerpos = data.body;
            console.log(data);
         })

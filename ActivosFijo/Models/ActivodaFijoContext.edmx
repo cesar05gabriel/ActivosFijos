@@ -4,168 +4,168 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Activos_FijoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Activos_Fijos">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Departamento" Type="int" Nullable="false" />
-          <Property Name="Tipos_Activos" Type="int" Nullable="false" />
-          <Property Name="Fecha_Registro" Type="date" Nullable="false" />
-          <Property Name="Valor_Compra" Type="int" Nullable="false" />
-          <Property Name="Depreciacion_Acumulada" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Desechado" Type="bit" Nullable="false" />
-          <Property Name="Periodo" Type="date" />
-          <Property Name="Monto_Despreciado" Type="int" />
-        </EntityType>
-        <EntityType Name="Calculo_Depreciacion">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Periodo" Type="date" Nullable="false" />
-          <Property Name="Activo_Fijo" Type="int" Nullable="false" />
-          <Property Name="ID_AsientosCont" Type="int" Nullable="false" />
-          <Property Name="Fecha_Proceso" Type="date" Nullable="false" />
-          <Property Name="Monto_Despreciado" Type="int" Nullable="false" />
-          <Property Name="Depreciacion_Acum" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Cuenta_Compra" Type="int" Nullable="false" />
-          <Property Name="Cuenta_Despreciacion" Type="int" Nullable="false" />
-          <Property Name="Desechado" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Departamentos">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Estado" Type="bit" Nullable="false" />
-          <Property Name="Desechado" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Empleados">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Cedula" Type="varchar" MaxLength="13" Nullable="false" />
-          <Property Name="Departamento" Type="int" Nullable="false" />
-          <Property Name="Tipo_Persona" Type="int" Nullable="false" />
-          <Property Name="Fecha_Ingreso" Type="date" Nullable="false" />
-          <Property Name="Estado" Type="bit" Nullable="false" />
-          <Property Name="Desechado" Type="bit" Nullable="false" />
-          <Property Name="Username" Type="varchar" MaxLength="50" />
-          <Property Name="Password" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="Tipo_Persona">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Tipo_Persona" Type="varchar" MaxLength="10" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Tipos_Activos">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Contable_Compra" Type="int" Nullable="false" />
-          <Property Name="Contable_Depreciacion" Type="int" Nullable="false" />
-          <Property Name="Estado" Type="bit" Nullable="false" />
-          <Property Name="Desechado" Type="bit" Nullable="false" />
-        </EntityType>
-        <Association Name="FK__Activos_F__Depar__534D60F1">
-          <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="1" />
-          <End Role="Activos_Fijos" Type="Self.Activos_Fijos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Departamentos">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Activos_Fijos">
-              <PropertyRef Name="Departamento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Activos_F__Tipos__5441852A">
-          <End Role="Tipos_Activos" Type="Self.Tipos_Activos" Multiplicity="1" />
-          <End Role="Activos_Fijos" Type="Self.Activos_Fijos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tipos_Activos">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Activos_Fijos">
-              <PropertyRef Name="Tipos_Activos" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Calculo_D__Activ__5812160E">
-          <End Role="Activos_Fijos" Type="Self.Activos_Fijos" Multiplicity="1" />
-          <End Role="Calculo_Depreciacion" Type="Self.Calculo_Depreciacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Activos_Fijos">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Calculo_Depreciacion">
-              <PropertyRef Name="Activo_Fijo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Empleados__Depar__4F7CD00D">
-          <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="1" />
-          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Departamentos">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Empleados">
-              <PropertyRef Name="Departamento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Empleados__Tipo___5070F446">
-          <End Role="Tipo_Persona" Type="Self.Tipo_Persona" Multiplicity="1" />
-          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tipo_Persona">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Empleados">
-              <PropertyRef Name="Tipo_Persona" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="Activos_FijoModelStoreContainer">
-          <EntitySet Name="Activos_Fijos" EntityType="Self.Activos_Fijos" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Calculo_Depreciacion" EntityType="Self.Calculo_Depreciacion" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Departamentos" EntityType="Self.Departamentos" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Tipo_Persona" EntityType="Self.Tipo_Persona" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Tipos_Activos" EntityType="Self.Tipos_Activos" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Activos_F__Depar__534D60F1" Association="Self.FK__Activos_F__Depar__534D60F1">
-            <End Role="Departamentos" EntitySet="Departamentos" />
-            <End Role="Activos_Fijos" EntitySet="Activos_Fijos" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Activos_F__Tipos__5441852A" Association="Self.FK__Activos_F__Tipos__5441852A">
-            <End Role="Tipos_Activos" EntitySet="Tipos_Activos" />
-            <End Role="Activos_Fijos" EntitySet="Activos_Fijos" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Calculo_D__Activ__5812160E" Association="Self.FK__Calculo_D__Activ__5812160E">
-            <End Role="Activos_Fijos" EntitySet="Activos_Fijos" />
-            <End Role="Calculo_Depreciacion" EntitySet="Calculo_Depreciacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Empleados__Depar__4F7CD00D" Association="Self.FK__Empleados__Depar__4F7CD00D">
-            <End Role="Departamentos" EntitySet="Departamentos" />
-            <End Role="Empleados" EntitySet="Empleados" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Empleados__Tipo___5070F446" Association="Self.FK__Empleados__Tipo___5070F446">
-            <End Role="Tipo_Persona" EntitySet="Tipo_Persona" />
-            <End Role="Empleados" EntitySet="Empleados" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema></edmx:StorageModels>
+    <Schema Namespace="Activos_FijoModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Activos_FijoModelStoreContainer">
+    <EntitySet Name="Activos_Fijos" EntityType="Activos_FijoModel.Store.Activos_Fijos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Calculo_Depreciacion" EntityType="Activos_FijoModel.Store.Calculo_Depreciacion" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Departamentos" EntityType="Activos_FijoModel.Store.Departamentos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tipo_Persona" EntityType="Activos_FijoModel.Store.Tipo_Persona" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tipos_Activos" EntityType="Activos_FijoModel.Store.Tipos_Activos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Empleados" EntityType="Activos_FijoModel.Store.Empleados" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK__Activos_F__Depar__534D60F1" Association="Activos_FijoModel.Store.FK__Activos_F__Depar__534D60F1">
+      <End Role="Departamentos" EntitySet="Departamentos" />
+      <End Role="Activos_Fijos" EntitySet="Activos_Fijos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Activos_F__Tipos__5441852A" Association="Activos_FijoModel.Store.FK__Activos_F__Tipos__5441852A">
+      <End Role="Tipos_Activos" EntitySet="Tipos_Activos" />
+      <End Role="Activos_Fijos" EntitySet="Activos_Fijos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Calculo_D__Activ__5812160E" Association="Activos_FijoModel.Store.FK__Calculo_D__Activ__5812160E">
+      <End Role="Activos_Fijos" EntitySet="Activos_Fijos" />
+      <End Role="Calculo_Depreciacion" EntitySet="Calculo_Depreciacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Empleados__Depar__4F7CD00D" Association="Activos_FijoModel.Store.FK__Empleados__Depar__4F7CD00D">
+      <End Role="Departamentos" EntitySet="Departamentos" />
+      <End Role="Empleados" EntitySet="Empleados" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Empleados__Tipo___5070F446" Association="Activos_FijoModel.Store.FK__Empleados__Tipo___5070F446">
+      <End Role="Tipo_Persona" EntitySet="Tipo_Persona" />
+      <End Role="Empleados" EntitySet="Empleados" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Activos_Fijos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Departamento" Type="int" Nullable="false" />
+    <Property Name="Tipos_Activos" Type="int" Nullable="false" />
+    <Property Name="Fecha_Registro" Type="datetime" Nullable="false" />
+    <Property Name="Valor_Compra" Type="int" Nullable="false" />
+    <Property Name="Depreciacion_Acumulada" Type="decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Desechado" Type="bit" Nullable="false" />
+    <Property Name="Periodo" Type="datetime" Nullable="true" />
+    <Property Name="Monto_Despreciado" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Calculo_Depreciacion">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Periodo" Type="datetime" Nullable="false" />
+    <Property Name="Activo_Fijo" Type="int" Nullable="false" />
+    <Property Name="ID_AsientosCont" Type="int" Nullable="false" />
+    <Property Name="Fecha_Proceso" Type="datetime" Nullable="false" />
+    <Property Name="Monto_Despreciado" Type="int" Nullable="false" />
+    <Property Name="Depreciacion_Acum" Type="decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Cuenta_Compra" Type="int" Nullable="false" />
+    <Property Name="Cuenta_Despreciacion" Type="int" Nullable="false" />
+    <Property Name="Desechado" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Departamentos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Estado" Type="bit" Nullable="false" />
+    <Property Name="Desechado" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tipo_Persona">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Tipo_Persona1" Type="varchar" Nullable="false" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Tipos_Activos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Contable_Compra" Type="int" Nullable="false" />
+    <Property Name="Contable_Depreciacion" Type="int" Nullable="false" />
+    <Property Name="Estado" Type="bit" Nullable="false" />
+    <Property Name="Desechado" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Empleados">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="Cedula" Type="varchar" Nullable="false" MaxLength="13" />
+    <Property Name="Departamento" Type="int" Nullable="false" />
+    <Property Name="Tipo_Persona" Type="int" Nullable="false" />
+    <Property Name="Fecha_Ingreso" Type="datetime" Nullable="false" />
+    <Property Name="Estado" Type="bit" Nullable="false" />
+    <Property Name="Desechado" Type="bit" Nullable="false" />
+    <Property Name="Username" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Password" Type="varchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__Activos_F__Depar__534D60F1">
+    <End Role="Departamentos" Type="Activos_FijoModel.Store.Departamentos" Multiplicity="1" />
+    <End Role="Activos_Fijos" Type="Activos_FijoModel.Store.Activos_Fijos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departamentos">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Activos_Fijos">
+        <PropertyRef Name="Departamento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Activos_F__Tipos__5441852A">
+    <End Role="Tipos_Activos" Type="Activos_FijoModel.Store.Tipos_Activos" Multiplicity="1" />
+    <End Role="Activos_Fijos" Type="Activos_FijoModel.Store.Activos_Fijos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tipos_Activos">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Activos_Fijos">
+        <PropertyRef Name="Tipos_Activos" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Calculo_D__Activ__5812160E">
+    <End Role="Activos_Fijos" Type="Activos_FijoModel.Store.Activos_Fijos" Multiplicity="1" />
+    <End Role="Calculo_Depreciacion" Type="Activos_FijoModel.Store.Calculo_Depreciacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Activos_Fijos">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Calculo_Depreciacion">
+        <PropertyRef Name="Activo_Fijo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Empleados__Depar__4F7CD00D">
+    <End Role="Departamentos" Type="Activos_FijoModel.Store.Departamentos" Multiplicity="1" />
+    <End Role="Empleados" Type="Activos_FijoModel.Store.Empleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departamentos">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="Departamento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Empleados__Tipo___5070F446">
+    <End Role="Tipo_Persona" Type="Activos_FijoModel.Store.Tipo_Persona" Multiplicity="1" />
+    <End Role="Empleados" Type="Activos_FijoModel.Store.Empleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tipo_Persona">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="Tipo_Persona" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Activos_FijoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -343,89 +343,88 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Activos_FijoModelStoreContainer" CdmEntityContainer="Activos_FijoEntities">
-          <EntitySetMapping Name="Activos_Fijos">
-            <EntityTypeMapping TypeName="Activos_FijoModel.Activos_Fijos">
-              <MappingFragment StoreEntitySet="Activos_Fijos">
-                <ScalarProperty Name="Monto_Despreciado" ColumnName="Monto_Despreciado" />
-                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
-                <ScalarProperty Name="Tipos_Activos" ColumnName="Tipos_Activos" />
-                <ScalarProperty Name="Fecha_Registro" ColumnName="Fecha_Registro" />
-                <ScalarProperty Name="Valor_Compra" ColumnName="Valor_Compra" />
-                <ScalarProperty Name="Depreciacion_Acumulada" ColumnName="Depreciacion_Acumulada" />
-                <ScalarProperty Name="Desechado" ColumnName="Desechado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Calculo_Depreciacion">
-            <EntityTypeMapping TypeName="Activos_FijoModel.Calculo_Depreciacion">
-              <MappingFragment StoreEntitySet="Calculo_Depreciacion">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
-                <ScalarProperty Name="Activo_Fijo" ColumnName="Activo_Fijo" />
-                <ScalarProperty Name="ID_AsientosCont" ColumnName="ID_AsientosCont" />
-                <ScalarProperty Name="Fecha_Proceso" ColumnName="Fecha_Proceso" />
-                <ScalarProperty Name="Monto_Despreciado" ColumnName="Monto_Despreciado" />
-                <ScalarProperty Name="Depreciacion_Acum" ColumnName="Depreciacion_Acum" />
-                <ScalarProperty Name="Cuenta_Compra" ColumnName="Cuenta_Compra" />
-                <ScalarProperty Name="Cuenta_Despreciacion" ColumnName="Cuenta_Despreciacion" />
-                <ScalarProperty Name="Desechado" ColumnName="Desechado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Departamentos">
-            <EntityTypeMapping TypeName="Activos_FijoModel.Departamentos">
-              <MappingFragment StoreEntitySet="Departamentos">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Desechado" ColumnName="Desechado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tipo_Persona">
-            <EntityTypeMapping TypeName="Activos_FijoModel.Tipo_Persona">
-              <MappingFragment StoreEntitySet="Tipo_Persona">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Tipo_Persona1" ColumnName="Tipo_Persona" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tipos_Activos">
-            <EntityTypeMapping TypeName="Activos_FijoModel.Tipos_Activos">
-              <MappingFragment StoreEntitySet="Tipos_Activos">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Contable_Compra" ColumnName="Contable_Compra" />
-                <ScalarProperty Name="Contable_Depreciacion" ColumnName="Contable_Depreciacion" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Desechado" ColumnName="Desechado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Empleados">
-            <EntityTypeMapping TypeName="Activos_FijoModel.Empleados">
-              <MappingFragment StoreEntitySet="Empleados">
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Desechado" ColumnName="Desechado" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Fecha_Ingreso" ColumnName="Fecha_Ingreso" />
-                <ScalarProperty Name="Tipo_Persona" ColumnName="Tipo_Persona" />
-                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
-                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Activos_FijoModelStoreContainer" CdmEntityContainer="Activos_FijoEntities">
+    <EntitySetMapping Name="Activos_Fijos">
+      <EntityTypeMapping TypeName="IsTypeOf(Activos_FijoModel.Activos_Fijos)">
+        <MappingFragment StoreEntitySet="Activos_Fijos">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+          <ScalarProperty Name="Tipos_Activos" ColumnName="Tipos_Activos" />
+          <ScalarProperty Name="Fecha_Registro" ColumnName="Fecha_Registro" />
+          <ScalarProperty Name="Valor_Compra" ColumnName="Valor_Compra" />
+          <ScalarProperty Name="Depreciacion_Acumulada" ColumnName="Depreciacion_Acumulada" />
+          <ScalarProperty Name="Desechado" ColumnName="Desechado" />
+          <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+          <ScalarProperty Name="Monto_Despreciado" ColumnName="Monto_Despreciado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Calculo_Depreciacion">
+      <EntityTypeMapping TypeName="IsTypeOf(Activos_FijoModel.Calculo_Depreciacion)">
+        <MappingFragment StoreEntitySet="Calculo_Depreciacion">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+          <ScalarProperty Name="Activo_Fijo" ColumnName="Activo_Fijo" />
+          <ScalarProperty Name="ID_AsientosCont" ColumnName="ID_AsientosCont" />
+          <ScalarProperty Name="Fecha_Proceso" ColumnName="Fecha_Proceso" />
+          <ScalarProperty Name="Monto_Despreciado" ColumnName="Monto_Despreciado" />
+          <ScalarProperty Name="Depreciacion_Acum" ColumnName="Depreciacion_Acum" />
+          <ScalarProperty Name="Cuenta_Compra" ColumnName="Cuenta_Compra" />
+          <ScalarProperty Name="Cuenta_Despreciacion" ColumnName="Cuenta_Despreciacion" />
+          <ScalarProperty Name="Desechado" ColumnName="Desechado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Departamentos">
+      <EntityTypeMapping TypeName="IsTypeOf(Activos_FijoModel.Departamentos)">
+        <MappingFragment StoreEntitySet="Departamentos">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Desechado" ColumnName="Desechado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tipo_Persona">
+      <EntityTypeMapping TypeName="IsTypeOf(Activos_FijoModel.Tipo_Persona)">
+        <MappingFragment StoreEntitySet="Tipo_Persona">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Tipo_Persona1" ColumnName="Tipo_Persona1" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tipos_Activos">
+      <EntityTypeMapping TypeName="IsTypeOf(Activos_FijoModel.Tipos_Activos)">
+        <MappingFragment StoreEntitySet="Tipos_Activos">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Contable_Compra" ColumnName="Contable_Compra" />
+          <ScalarProperty Name="Contable_Depreciacion" ColumnName="Contable_Depreciacion" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Desechado" ColumnName="Desechado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Empleados">
+      <EntityTypeMapping TypeName="IsTypeOf(Activos_FijoModel.Empleados)">
+        <MappingFragment StoreEntitySet="Empleados">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+          <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+          <ScalarProperty Name="Tipo_Persona" ColumnName="Tipo_Persona" />
+          <ScalarProperty Name="Fecha_Ingreso" ColumnName="Fecha_Ingreso" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Desechado" ColumnName="Desechado" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -439,7 +438,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

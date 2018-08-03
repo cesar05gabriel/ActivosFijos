@@ -74,7 +74,7 @@ export default {
       var quitar = this.cuerpos;
     var r = confirm("Desea eliminar el tipo de activo seleccionado ?" );
     if (r == true) {
-        this.$http.delete('http://localhost:61542/Api/Tipos_Activos/' + IdEliminado,{
+        this.$http.delete('http://activosfijo20180720102414.azurewebsites.net/api/Tipos_Activos/' + IdEliminado,{
         ID: IdEliminado,
 
       }).then(Response => quitar.splice(index, 1))
@@ -86,7 +86,7 @@ export default {
 
     created()
     {
-        this.$http.get('http://localhost:61542/Api/Tipos_Activos').then(function(data){
+        this.$http.get('http://activosfijo20180720102414.azurewebsites.net/api/Tipos_Activos').then(function(data){
            this.cuerpos = data.body;
           console.log(data);
         })

@@ -77,7 +77,7 @@ export default {
       var quitar = this.cuerpos;
     var r = confirm("Desea eliminar el empleado seleccionado ?" );
     if (r == true) {
-        this.$http.delete('http://localhost:61542/Api/Empleados/' + IdEliminado,{
+        this.$http.delete('http://activosfijo20180720102414.azurewebsites.net/api/Empleados/' + IdEliminado,{
         ID: IdEliminado,
 
       }).then(Response => quitar.splice(index, 1))
@@ -89,7 +89,7 @@ export default {
 
     created()
     {
-        this.$http.get('http://localhost:61542/Api/Empleados').then(function(data){
+        this.$http.get('http://activosfijo20180720102414.azurewebsites.net/api/Empleados').then(function(data){
            this.cuerpos = data.body;
         })
   }

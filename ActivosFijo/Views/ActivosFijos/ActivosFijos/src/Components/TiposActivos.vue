@@ -40,7 +40,7 @@ export default {
     {
       this.$validator.validateAll().then(res=>{
                 if(res) {
-      this.$http.post('http://localhost:61542/Api/Tipos_Activos',{
+      this.$http.post('http://activosfijo20180720102414.azurewebsites.net/api/Tipos_Activos',{
         Descripcion:this.descripcion,
         Contable_Compra:this.contable_compra,
         Contable_Depreciacion:this.contable_depreciacion,

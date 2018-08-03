@@ -42,7 +42,7 @@ export default {
     {
         this.$validator.validateAll().then(res=>{
                 if(res) {
-      this.$http.put('http://localhost:61542/Api/Tipos_Activos/' + this.id,{
+      this.$http.put('http://activosfijo20180720102414.azurewebsites.net/api/Tipos_Activos/' + this.id,{
         ID:this.id,
         Descripcion:this.cuerpos.Descripcion,
         Contable_Compra:this.cuerpos.Contable_Compra,
@@ -61,7 +61,7 @@ export default {
         this.id = this.$route.params.id
         if(this.id != null){
           this.modo = 'E';
-        this.$http.get('http://localhost:61542/Api/Tipos_Activos/' + this.id).then(function(data){
+        this.$http.get('http://activosfijo20180720102414.azurewebsites.net/api/Tipos_Activos/' + this.id).then(function(data){
            this.cuerpos = data.body;
           console.log(data);
         });

@@ -1,0 +1,91 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <title>Index</title>
+</head>
+<body>
+    @model ActivosFijo.Models.Activos_Fijos
+    @{
+        decimal depreciacionMensual = 0;
+        decimal acumulada = 0;
+        var valor = Model.Valor_Compra;
+
+        if (ViewBag.Years > 0)
+        {
+            depreciacionMensual = (decimal)(Model.Valor_Compra / ViewBag.Years) / 12;
+        }
+    }
+    <br /><br />
+    <div style="background-color: #0158a7;" class="navbar-fixed-top">
+        <div class="container">
+            <h2 style="color: white; margin-bottom: 20px;">Activos Fijos</h2>
+        </div>
+    </div>
+    <div class="container">
+        <br /><br /><br />
+        <div class="row">
+            <div class="col-sm-6">
+                <h3><i class=""></i> Tabla de Depreciación de Activo Fijo</h3>
+            </div>
+            <div class="col-sm-6">
+                <button class="btn btn-default btn-sm pull-right" onclick="window.history.back()">Regresar</button>
+            </div>
+        </div>
+        <hr />
+        <table style="font-size: 16px; width: 90%;">
+            <tr>
+                <td><b>Descripción:</b></td>
+                <td>@Model.Descripcion</td>
+                <td><b>Valor de compra:</b></td>
+                <td>@($"RD${Model.Valor_Compra}.00") </td>
+                <td><b>Depreciación mensual:</b></td>
+                <td>@($"{((depreciacionMensual == 0) ? "Debe especificar la cantidad de años" : "RD$" + depreciacionMensual.ToString("#.##"))}")</td>
+            </tr>
+        </table>
+        <hr />
+
+        <form method="get" action="@Url.Action("Index", "Depreciacion")">
+            <table>
+                <tr>
+                    <td>Depreciación en &nbsp;&nbsp;</td>
+                    <td><input type="number" min="1" step="1" name="years" id="years" placeholder="Años" class="form-control input-sm" /></td>
+                    <td>&nbsp;&nbsp; <button class="btn btn-default btn-sm"><i class="fa fa-calculator"></i> Calcular</button></td>
+                </tr>
+            </table>
+        </form>
+
+        @if (ViewBag.Years > 0)
+        {
+            <br />
+            <table class="table table-striped">
+                <tr>
+                    <td><b>Periodo</b></td>
+                    <td><b>Valor del activo</b></td>
+                    <td><b>Depreciación acumulada</b></td>
+                </tr>
+                @for (var year = 1; year <= ViewBag.Years; year++)
+                {
+                    for (int mes = 1; mes <= 12; mes++)
+                    {
+                        acumulada += depreciacionMensual;
+                        <tr>
+                            <td>@($"Año {year} / Mes {mes}")</td>
+                            <td>@($"RD${(valor - acumulada).ToString("#.##")}")</td>
+                            <td>@($"RD${(acumulada).ToString("#.##")}")</td>
+                        </tr>
+                    }
+                }
+            </table>
+        }
+    </div>
+</body>
+</html>

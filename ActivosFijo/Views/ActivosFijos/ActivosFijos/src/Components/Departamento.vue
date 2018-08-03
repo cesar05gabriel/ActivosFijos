@@ -38,7 +38,7 @@ export default {
               this.$validator.validateAll().then(res=>{
                 if(res) {
       
-      this.$http.post('http://localhost:61542/Api/Departamentos',{
+      this.$http.post('http://activosfijo20180720102414.azurewebsites.net/Api/Departamentos/',{
         Descripcion:this.cuerpos.Descripcion,
         Estado:this.cuerpos.Estado
       }).then(function(data){

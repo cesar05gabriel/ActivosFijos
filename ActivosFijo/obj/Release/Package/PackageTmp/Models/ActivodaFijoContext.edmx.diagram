@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="08b613336ae44ae39c515584a02d8859" Name="Diagram1">
+        <EntityTypeShape EntityType="Activos_FijoModel.Activos_Fijos" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Activos_FijoModel.Calculo_Depreciacion" Width="1.5" PointX="5.25" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Activos_FijoModel.Departamentos" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Activos_FijoModel.Tipo_Persona" Width="1.5" PointX="3.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Activos_FijoModel.Tipos_Activos" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="Activos_FijoModel.FK__Activos_F__Depar__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="Activos_FijoModel.FK__Activos_F__Tipos__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="Activos_FijoModel.FK__Calculo_D__Activ__5812160E" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Activos_FijoModel.Empleados" Width="1.5" PointX="6" PointY="2.625" />
+        <AssociationConnector Association="Activos_FijoModel.FK__Empleados__Depar__4F7CD00D" />
+        <AssociationConnector Association="Activos_FijoModel.FK__Empleados__Tipo___5070F446" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

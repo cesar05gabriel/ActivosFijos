@@ -78,7 +78,7 @@ export default {
     {
        this.$validator.validateAll().then(res=>{
                 if(res) {
-      this.$http.post('http://localhost:61542/Api/Ac_Fijos',{
+      this.$http.post('http://activosfijo20180720102414.azurewebsites.net/api/Ac_Fijos',{
         Descripcion:this.descripcion,
         Departamento:this.departamento,
         Tipos_Activos:this.tipo_activo,
@@ -97,12 +97,12 @@ export default {
 
   created()
     {
-        this.$http.get('http://localhost:61542/Api/Departamentos', {params: {activos: true}}).then(function(data){
+        this.$http.get('http://activosfijo20180720102414.azurewebsites.net/api/Departamentos', {params: {activos: true}}).then(function(data){
            this.cuerpos = data.body;
            console.log(data);
         })
 
-        this.$http.get('http://localhost:61542/Api/Tipos_Activos', {params: {tipos: true}}).then(function(data){
+        this.$http.get('http://activosfijo20180720102414.azurewebsites.net/api/Tipos_Activos', {params: {tipos: true}}).then(function(data){
            this.Tiposcuerpos = data.body;
            console.log(data);
         })
