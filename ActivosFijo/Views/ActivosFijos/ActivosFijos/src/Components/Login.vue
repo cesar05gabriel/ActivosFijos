@@ -31,17 +31,24 @@ export default {
                 if(res) {
             this.username = document.getElementById('username').value;
             this.password = document.getElementById('password').value;
-            this.$http.get("http://activosfijo20180720102414.azurewebsites.net/api/Empleados/Login?username=" + this.username + "&password=" + this.password).then(function(data){
+            this.$http.get("http://localhost:61542/api/Empleados/Login?username=" + this.username + "&password=" + this.password).then(function(data){
                 console.log(data);
-                if (data.body == 1){
-
-                    this.$router.push({ path: "/Home" })                    
+                if (data.body){
+                    window.location.replace ("/Home");
+                    document.getElementById('menuNavBar').setAttribute('class', 'visible');
+                    document.getElementById('home').setAttribute('class', 'visible');                    
                 }
                 else{
                     alert("Datos incorrectos");
                 }
             });}})
         }
+    },
+
+    mounted()
+    {
+        document.getElementById('menuNavBar').setAttribute('class', 'invisible');
+        document.getElementById('home').setAttribute('class', 'invisible');
     }
 }
 </script>

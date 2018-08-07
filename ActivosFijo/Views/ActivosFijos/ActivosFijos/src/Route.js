@@ -12,6 +12,8 @@ import EdTiposActivos from './Components/EdTiposActivos.vue';
 import EdEmpleado from './Components/EdEmpleados.vue';
 import EdActivosFijos from './Components/EdActivosFijos.vue';
 import LoginForm from './Components/Login.vue';
+import AsientoContable from './Components/AsientoContable.vue';
+import ConsultaAsientoContable from './Components/ConsultaAsientoContable.vue';
 
 export default[
     {path: '/Dep', component: Departamento},
@@ -27,5 +29,7 @@ export default[
     {path: '/ET/:id?', component: EdTiposActivos},
     {path: '/EE/:id?', component: EdEmpleado},
     {path: '/EAF/:id?', component: EdActivosFijos},
-    {path: '/', component: LoginForm}
+    {path: '/', component: LoginForm},
+    {path: '/AC', component: AsientoContable},
+    {path: '/CAC', component: ConsultaAsientoContable}
 ]

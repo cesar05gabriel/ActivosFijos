@@ -25,9 +25,6 @@
         <th>Tipos de Activos</th>
         <th>Fecha de Registro</th>
         <th>Valor de Compra</th>
-        <th>Depreciacion Acumulada</th>
-        <!--<th>Periodo</th>-->
-        <th>Monto Depreciacion</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -39,9 +36,6 @@
         <td>{{cuerpo.Tipos_Activos}}</td>
         <td>{{cuerpo.Fecha_Registro}}</td>
         <td>{{cuerpo.Valor_Compra}}</td>
-        <td>{{cuerpo.Depreciacion_Acumulada}}</td>
-        <!--<td>{{cuerpo.Periodo}}</td>-->
-        <td>{{cuerpo.Monto_Despreciado}}</td>
         <td>
         <button v-on:click="Eliminar(cuerpo.ID, index)" class='btn' id="eliminar"><i class="fa fa-trash"></i></button>
         <router-link v-bind:to="'/EAF/' + cuerpo.ID"><button class="btn"><i class="fa fa-pencil"></i></button></router-link>

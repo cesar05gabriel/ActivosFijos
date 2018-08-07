@@ -32,15 +32,6 @@
           <label>Valor de Compra</label><br>
           <input type="number" v-model="valor_compra" v-validate="'required|min_value:1'" name="compra" class="form-control" placeholder="Ingrese el valor de compra">
           <span v-show="errors.has('compra')" class="text-danger" id="error">Complete el valor de compra correctamente.</span><br><br>
-          <label>Depreciacion Acumulada</label><br>
-          <input type="number" v-model="depreciacion_acu" v-validate="'required|min_value:1'" name="depre" class="form-control" placeholder="Ingrese la depreciacion acumulada">
-          <span v-show="errors.has('depre')" class="text-danger" id="error">Complete la depreciacion acumulada correctamente.</span><br><br>        
-          <label>Periodo</label><br>
-          <input type="date" v-model="periodo" v-validate="'required'" name="fechas" class="form-control" placeholder="Seleccione el periodo">
-          <span v-show="errors.has('fechas')" class="text-danger">El periodo es requerido.</span><br><br>   
-          <label>Monto Depreciacion</label><br>
-          <input type="text" v-model="monto" v-validate="'required|min_value:0'" name="monto" class="form-control" readonly>  
-          <span v-show="errors.has('monto')" class="text-danger" id="error">El monto de depreciacion debe ser positivo.</span><br><br>      
           <button v-on:click.prevent ="post" class="btn btn-primary" :disabled="errors.any()">Enviar</button><br><br>
       </div>
       </form>

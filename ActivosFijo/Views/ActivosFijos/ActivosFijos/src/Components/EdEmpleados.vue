@@ -12,23 +12,20 @@
           <input type="text" v-model="cuerpos.Cedula" v-validate="'required'" name="cedula" class="form-control" placeholder="Ingrese la cedula" required><br><br>
           <label>Departamento</label><br>
           <!--<input type="number" v-model="departamento" class="form-control" placeholder="Seleccione el departamento" min="1" required><br><br>-->
-          <select class="custom-select" style="width:100px; height:30px;" v-model="cuerpos.Departamento">
-            <option v-for="cuerpo in cuerpos">{{cuerpos.Departamento}}</option>
+          <select class="custom-select" style="width:100px; height:30px;" v-model="departamento">
+            <option v-for="edita in editar" v-bind:value='edita.ID' v-bind:key='edita.ID'>{{edita.Descripcion}}</option>
           </select>
           <br>
           <br>
           <br>
           <label>Tipo de Persona</label><br>
           <!--<input type="number" v-model="tipo_persona" class="form-control" placeholder="Seleccione el tipo de persona" min="1" required><br><br>-->
-          <select class="custom-select" style="width:100px; height:30px;" v-model="cuerpos.Tipo_Persona">
-            <option v-for="cuerpo in cuerpos">{{cuerpos.Tipo_Persona}}</option>
+          <select class="custom-select" style="width:100px; height:30px;" v-model="tipo_persona">
+            <option v-for="Tipocuerpo in Tiposcuerpos" v-bind:value='Tipocuerpo.ID' v-bind:key='Tipocuerpo.ID'>{{Tipocuerpo.Tipo_Persona1}}</option>
           </select>
           <br>
           <br>
           <br>
-          <label>Fecha de Ingreso</label><br>
-          <input type="date" v-model="cuerpos.Fecha_Ingreso" v-validate="'required'" name="fecha" class="form-control" placeholder="Seleccione la fecha">
-          <span v-show="errors.has('fecha')" class="text-danger">La fecha de ingreso es requerida.</span><br><br>
           <label id="caja">Estado</label>
           <input type="checkbox" v-model="cuerpos.Estado"><br><br>          
           <button v-on:click.prevent ="post" class="btn btn-primary" :disabled="errors.any()">Enviar</button><br><br>
@@ -67,8 +64,8 @@ export default {
         Cedula:this.cuerpos.Cedula,
         Username:this.cuerpos.Username,
         Password:this.cuerpos.Password,
-        Departamento:this.cuerpos.Departamento,
-        Tipo_Persona:this.cuerpos.Tipo_Persona,
+        Departamento:this.departamento,
+        Tipo_Persona:this.tipo_persona,
         Fecha_Ingreso:this.cuerpos.Fecha_Ingreso,
         Estado:this.cuerpos.Estado
       }).then(function(data){
@@ -90,10 +87,9 @@ export default {
         });
     }
 
-    this.$http.get('http://activosfijo20180720102414.azurewebsites.net/api/Api/Empleados').then(function(data){
+     this.$http.get('http://activosfijo20180720102414.azurewebsites.net/api/Departamentos', {params: {activos: true}}).then(function(data){
            this.editar = data.body;
-          console.log(data);
-        });
+        })
 
         this.$http.get('http://activosfijo20180720102414.azurewebsites.net/api/Tipo_Persona').then(function(data){
            this.Tiposcuerpos = data.body;

@@ -4,20 +4,23 @@
       <link rel="stylesheet" type="text/css" href="bootstrap\css\bootstrap.css">
   <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
-    <div class="navbar-header">
+    <!--<div class="navbar-header">
       <button type="button" class="navbar-toggle" >
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span> 
       </button>
       <router-link to="/" id="home" class="navbar-brand">SIGN OUT</router-link>
-    </div>
+    </div>-->
     <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav navbar-right">
+      <ul  id="menuNavBar" class="nav navbar-nav navbar-right">
+        <li><router-link to="/home" id="mango">HOME</router-link></li>
         <li><router-link to="/Con" id="mango">DEPARTAMENTOS</router-link></li>
         <li><router-link to="/CTA" id="mango">TIPOS DE ACTIVOS</router-link></li>
         <li><router-link to="/CEm" id="mango">EMPLEADOS</router-link></li>
         <li><router-link to="/CAF" id="mango">ACTIVOS FIJOS</router-link></li>
+        <li><router-link to="/CAC" id="mango">ASIENTOS CONTABLES</router-link></li>
+        <li><router-link to="/" id="mango">SIGN OUT</router-link></li>
         <!--<li><router-link to="/Con" id="mango">CONSULTAS</router-link></li>-->   
         <!--<li><div class="dropdown">
     <button class="dropbtn">CONSULTAS 
@@ -35,7 +38,7 @@
 <div class="jumbotron text-center">
 <br>
 <br>
-<router-link to="/home" id="ruta"><header><strong><h1><a id="principal">Plataforma de Activos Fijos</a></h1></strong></header></router-link>
+<header><strong><h1><a id="principal">Plataforma de Activos Fijos</a></h1></strong></header>
 <p>Sistema de Contabilidad de UNAPEC</p>    
 </div>
 
@@ -48,7 +51,7 @@ export default {
   name: 'Header',
   data () {
     return {
-     
+      
     }
   }
 }
@@ -60,7 +63,7 @@ export default {
 .jumbotron {
 color: #ffffff;
 background-color: #0158A7;
-padding: 40px 30px;
+padding: 78px 30px;
 }
 
 .container-fluid{
@@ -94,7 +97,7 @@ text-decoration: none;
 
 #mango{
 color:white;
-font-size: 16px;
+font-size: 14px;
 }
 
 #mango:hover, .dropdown:hover .dropbtn  {
